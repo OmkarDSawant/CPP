@@ -7,6 +7,6 @@ int powOf2(int a){
 }
 
 int main(){
-    cout<<powOf2(15);
+    cout<<powOf2(8);
     return 0;
 }
