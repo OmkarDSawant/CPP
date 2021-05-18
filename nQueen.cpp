@@ -56,6 +56,7 @@ int main(){
     int n;
     cin>>n;
 
+    //dynamic array declaration
     int** arr=new int*[n];
     for(int i=0;i<n;i++){
         arr[i]=new int[n];
