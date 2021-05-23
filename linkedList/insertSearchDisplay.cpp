@@ -50,8 +50,7 @@ bool search(node* head, int key){
 
 void insertAtHead(node* &head, int val){
     node* n = new node(val);
-    node *temp = n;
-    temp->next = head;
+    n->next = head;
     head = n;
 }
 
@@ -61,14 +60,22 @@ void deletion(node* &head, int val){
     if(temp==NULL){ //No elements present.
         return;
     }
-    if(temp->next==NULL){ //Only one element is present.
-        delete head;
+    if(temp->data==val && temp->next==NULL){ //First element is to be deleted.
+        delete temp;
         head=NULL;
+        return;
+    }
+    if(temp->data==val && temp->next!=NULL){ //First element is to be deleted.
+        head=head->next;
+        delete temp;
         return;
     }
 
     while(temp->next->data!=val){// This also checks whether element is not present.
         temp=temp->next;
+    }
+    if(temp->data!=val){
+        return;
     }
     node* todelete = temp->next;
     temp->next=temp->next->next;
@@ -76,17 +83,81 @@ void deletion(node* &head, int val){
 
 }
 
+//iterative method
+node* reverse(node* &head){
+    node* prevptr = NULL;
+    node* currptr = head;
+    node* nexptr;
+    while(currptr!=NULL){
+        nexptr=currptr->next;
+
+        currptr->next=prevptr;
+        prevptr = currptr;
+        currptr = nexptr;
+    }
+    return prevptr;
+}
+
+//recursive method
+node* reverseRecur(node* head){
+
+    if(head==NULL||head->next==NULL){
+        return head;
+    }
+
+    node* newhead = reverseRecur(head->next);
+    head->next->next = head;
+    head->next = NULL;
+
+    return newhead;
+}
+
+//Reverse K nodes
+node* reverseK(node* &head, int k){
+    node* prevptr = NULL;
+    node* currptr = head;
+    node* nextptr;
+
+    int count=0;
+    while(currptr!=NULL && count<k){
+        nextptr=currptr->next;
+        currptr->next = prevptr;
+        prevptr=currptr;
+        currptr=nextptr;
+        count++; //very important
+    }
+
+    if(nextptr!=NULL){
+        head->next = reverseK(nextptr,k);
+    }
+
+    return prevptr;
+}
+
 int main(){
     node* head=NULL;
+
     insertAtTail(head,1);
     insertAtTail(head,2);
     insertAtTail(head,3);
     insertAtTail(head,4);
-    insertAtHead(head,0);
+    insertAtTail(head,5);
+    insertAtTail(head,6);
+
     display(head);
-    //cout<<"\n"<<search(head,4);
-    deletion(head,5);
     cout<<"\n";
-    display(head);
+
+    // cout<<"\n";
+    // cout<<"\n"<<search(head,4);
+
+    // deletion(head,5); //Error: If element to be deleted is not present then nothing after that gets exectued.
+    // display(head);
+
+    // cout<<"\n";
+    // node* headptr = reverseRecur(head);
+    // display(headptr);
+
+    node* newhead = reverseK(head,2);
+    display(newhead);
     return 0;
 }
