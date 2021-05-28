@@ -183,18 +183,113 @@ void removeCycle(node* head){
     
 }
 
+int length(node* head){
+    node* temp = head;
+    int count = 0;
+    while(temp!=NULL){
+        temp=temp->next;
+        count++;
+    }
+    return count;
+}
+
+node* appendKN(node* &head,int k){
+    int l = length(head);
+    k = k%l;
+    node* newhead;
+    node* newtail;
+    node* tail = head;
+    int count=1;
+
+    while(tail->next!=NULL){
+        if(count==(l-k)){
+            newtail = tail;
+        }
+        if(count==(l-k+1)){
+            newhead = tail;
+        }
+        count++;
+        tail = tail->next;
+    }
+    tail->next = head;
+    newtail->next = NULL;
+    return newhead;
+}
+
+void intersectTwo(node* head1, node* head2, int pos){
+    node* temp1=head1;
+    node* temp2=head2;
+    int count = 1;
+
+    while(temp2->next!=NULL){
+        temp2 = temp2->next;
+    }
+    while(temp1->next!=NULL && count<pos){
+        temp1 = temp1->next;
+        count++;
+    }
+    temp2->next = temp1->next;
+}
+
+int intersectionOfTwo(node* head1, node* head2){
+    int l = length(head1);
+    int m = length(head2);
+    node* temp1=head1;
+    node* temp2=head2;
+    int count=1;
+    if(l>m){
+        while(count<=(l-m)){
+            temp1=temp1->next;
+            count++;
+        }
+
+        while(temp1!=temp2){
+            temp1=temp1->next;
+            temp2=temp2->next;
+        }
+        return temp1->data;
+    }else{
+        while(count<=(m-l)){
+            temp2=temp2->next;
+            count++;
+        }
+
+        while(temp1!=temp2){
+            temp1=temp1->next;
+            temp2=temp2->next;
+        }
+        return temp1->data;
+    }
+}
+
 int main(){
     node* head=NULL;
+    node* head2=NULL;
 
     insertAtTail(head,1);
     insertAtTail(head,2);
     insertAtTail(head,3);
     insertAtTail(head,4);
-    insertAtTail(head,5);
-    insertAtTail(head,6);
+    insertAtTail(head,7);
+    insertAtTail(head,8);
 
     display(head);
     cout<<"\n";
+
+    insertAtTail(head2,5);
+    insertAtTail(head2,6);
+
+    display(head2);
+    cout<<"\n";
+
+    intersectTwo(head,head2,4);
+    
+    display(head2);
+    cout<<"\n";
+
+    cout<<intersectionOfTwo(head,head2);
+
+
 
     // cout<<"\n";
     // cout<<"\n"<<search(head,4);
@@ -209,9 +304,15 @@ int main(){
     // node* newhead = reverseK(head,2);
     // display(newhead);
 
-    makeCycle(head,3);
-    cout<<detectCycle(head)<<"\n";
-    removeCycle(head);
-    display(head);
+    // makeCycle(head,3);
+    // cout<<detectCycle(head)<<"\n";
+    // removeCycle(head);
+    // display(head);
+
+    // cout<<length(head)<<"\n";
+    // node* newH = appendKN(head,3);
+    // display(newH);
+
+
     return 0;
 }
