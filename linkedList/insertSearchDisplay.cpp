@@ -261,33 +261,65 @@ int intersectionOfTwo(node* head1, node* head2){
         return temp1->data;
     }
 }
+void EvenOdd(node* head){
 
+    node* odd = head;
+    node* even = head->next;
+    node* evenStart = even;
+
+    while(odd->next!=NULL && even->next!=NULL){
+        odd->next = even->next;
+        odd=odd->next;
+        even->next=odd->next;
+        even=even->next;
+    }
+    if(odd->next==NULL){
+        even->next=NULL;
+    }
+
+    odd->next=evenStart;
+
+}
 int main(){
-    node* head=NULL;
-    node* head2=NULL;
 
+    node* head=NULL;
     insertAtTail(head,1);
     insertAtTail(head,2);
     insertAtTail(head,3);
     insertAtTail(head,4);
-    insertAtTail(head,7);
-    insertAtTail(head,8);
-
+    insertAtTail(head,5);
+    insertAtTail(head,6);
     display(head);
     cout<<"\n";
 
-    insertAtTail(head2,5);
-    insertAtTail(head2,6);
+    EvenOdd(head);
+    display(head);
 
-    display(head2);
-    cout<<"\n";
+    // node* head=NULL;
+    // node* head2=NULL;
 
-    intersectTwo(head,head2,4);
+    // insertAtTail(head,1);
+    // insertAtTail(head,2);
+    // insertAtTail(head,3);
+    // insertAtTail(head,4);
+    // insertAtTail(head,7);
+    // insertAtTail(head,8);
+
+    // display(head);
+    // cout<<"\n";
+
+    // insertAtTail(head2,5);
+    // insertAtTail(head2,6);
+
+    // display(head2);
+    // cout<<"\n";
+
+    // intersectTwo(head,head2,4);
     
-    display(head2);
-    cout<<"\n";
+    // display(head2);
+    // cout<<"\n";
 
-    cout<<intersectionOfTwo(head,head2);
+    // cout<<intersectionOfTwo(head,head2);
 
 
 
