@@ -21,7 +21,7 @@ int calcHeight(Node* root){
     return max(calcHeight(root->left),calcHeight(root->right))+1;
 }
 
-int calcDiameter(Node* root){
+int calcDiameter(Node* root){ //Time Complexity O(n^2)
 
     if(root==NULL){
         return 0;
@@ -39,6 +39,26 @@ int calcDiameter(Node* root){
 
 }
 
+int calcDiameterUsingPointer(Node* root, int* height){ //Time Complexity O(n)
+
+    if(root==NULL){
+        // *height = 0;
+        return 0;
+    }
+
+    int lh = 0, rh =0;
+
+    int lDiameter = calcDiameterUsingPointer(root->left, &lh);
+    int rDiameter = calcDiameterUsingPointer(root->right, &rh);
+
+    int currDiameter = lh+rh+1;
+
+    *height = max(lh,rh) + 1; //Calculating for parent node.
+    
+    return max(currDiameter, max(lDiameter,rDiameter)); 
+
+}
+
 int main(){
 
     Node* root = new Node(1);
@@ -51,7 +71,9 @@ int main(){
     root->right->left = new Node(6);
     root->right->right = new Node(7);
 
-    cout<<calcDiameter(root);
+    int height = 0;
+
+    cout<<calcDiameterUsingPointer(root, &height);
 
     return 0;
 }
