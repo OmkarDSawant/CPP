@@ -78,7 +78,11 @@ int main(){
 
     root->left->right->right = new Node(8);
 
-    cout<<distBtwnNodes(root,8,7);
-
+    int val = distBtwnNodes(root,8,7);
+    if(val==-1){
+        cout<<"Invalid Nodes";
+    }else{
+        cout<<val;
+    }
     return 0;
 }
