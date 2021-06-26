@@ -35,10 +35,11 @@ Info largestBSTinBT(Node* root){
     Info rightInfo = largestBSTinBT(root->right);
 
     Info curr;
-    curr.size = (1 + leftInfo.size + rightInfo.size);
+    //curr.size = (1 + leftInfo.size + rightInfo.size);
 
     if(leftInfo.isBST && rightInfo.isBST && leftInfo.max < root->data && rightInfo.min > root->data){
         //We have to calculate curr.min and curr.max only when left.isBST and right.isBST are true.
+        curr.size = (1 + leftInfo.size + rightInfo.size);
         curr.min = min(leftInfo.min,min(rightInfo.min,root->data)); 
         curr.max = max(rightInfo.max,max(leftInfo.max,root->data));
 
