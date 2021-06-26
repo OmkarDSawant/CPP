@@ -27,7 +27,7 @@ Info largestBSTinBT(Node* root){
         return {0,INT_MIN,INT_MAX,0,true}; // implicitly typecasted.
     }
 
-    if(root->left == NULL && root->left == NULL){
+    if(root->left == NULL && root->right == NULL){
         return {1,root->data,root->data,1,true};
     }
 
@@ -35,7 +35,6 @@ Info largestBSTinBT(Node* root){
     Info rightInfo = largestBSTinBT(root->right);
 
     Info curr;
-    //curr.size = (1 + leftInfo.size + rightInfo.size);
 
     if(leftInfo.isBST && rightInfo.isBST && leftInfo.max < root->data && rightInfo.min > root->data){
         //We have to calculate curr.min and curr.max only when left.isBST and right.isBST are true.
