@@ -26,7 +26,7 @@ int main(){
 
     dis[source] = 0;
 
-    for(int i=0; i<n-1; i++){
+    for(int i=0; i<n-1; i++){ //Relaxing edges n-1 times.
 
         for(auto e : edges){
             int u = e[0];
