@@ -9,12 +9,14 @@ vector<bool> stack;
 
 bool isCycle(int src, vector<vector<int>> &adj, vector<bool> &visited, vector<bool> &stack){
     stack[src] = true;
-    for(auto i : adj[src]){
-        if(!visited[i]){
-            if(stack[i]){
+    if(!visited[src]){
+        visited[src] = true;
+        for(int it : adj[src]){
+            if(stack[it]){
                 return true;
             }
-            if(!visited[i] && isCycle(i,adj,visited,stack)){
+
+            if(!visited[it] && isCycle(it, adj, visited, stack)){
                 return true;
             }
         }
