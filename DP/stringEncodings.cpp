@@ -22,13 +22,18 @@ int main(){
             
             dp[i] = dp[i-1];
 
-        }else if((str[i-1]=='1' || str[i-1]=='2') && str[i]=='0'){ //Non zero and zero
-
-            dp[i] = i>=2 ? dp[i-2] : 1;
+        }else if(str[i-1]!='0' && str[i]=='0'){ //Non zero and zero
+            if(str[i-1]=='1' || str[i-1]=='2'){
+                dp[i] = i>=2 ? dp[i-2] : 1;
+            }else{
+                dp[i] = 0;
+            }
 
         }else{ //Non zero and non zero
             if( stoi(str.substr(i-1,2)) <= 26 ){
                 dp[i] = dp[i-1] + (i>=2 ? dp[i-2] : 1); 
+            }else{
+                dp[i] = dp[i-1];
             }
         }
     }
