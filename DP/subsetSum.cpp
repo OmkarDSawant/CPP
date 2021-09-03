@@ -36,6 +36,8 @@ int main(){
                         }else{
                             dp[i][j] = false;
                         }
+                    }else{
+                        dp[i][j] = false;
                     }
                 }
             }
