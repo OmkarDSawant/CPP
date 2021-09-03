@@ -29,6 +29,8 @@ int main(){
             if(weights[i-1]<=j){
                 if(dp[i-1][j] < dp[i-1][j-weights[i-1]] + vals[i-1]){
                     dp[i][j] = dp[i-1][j-weights[i-1]] + vals[i-1]; //If the current item is not included then max val is previous val.
+                }else{
+                    dp[i][j] = dp[i-1][j];
                 }
             }else{
                 dp[i][j] = dp[i-1][j];
