@@ -36,7 +36,7 @@ int main(){
             }
         }
         dp[i] = maxi + 1;
-        omax = max(maxi,omax);
+        omax = max(omax,dp[i]);
     }
 
     cout<<omax;
