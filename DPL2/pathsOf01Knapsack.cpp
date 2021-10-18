@@ -59,7 +59,7 @@ int main(){
             int exc = dp[rem.i-1][rem.j];
 
             if(exc == dp[rem.i][rem.j]){
-                q.push(Node(rem.i-1,rem.j,rem.psf));
+                q.push(Node(rem.i-1,rem.j,rem.psf)); //No updates in psf
             }
 
             if(rem.j>=wt[rem.i-1]){
