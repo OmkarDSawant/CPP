@@ -3,15 +3,15 @@
 using namespace std;
 
 struct Node{
-    int val;
     int prime;
     int index;
+    int val;
     
 
-    Node(int v, int p, int i){
-        val = v;
+    Node(int p, int i, int v){
         prime = p;
         index = i; 
+        val = v;
     }
 };
 
@@ -43,7 +43,8 @@ int main(){
     priority_queue<Node, vector<Node>, CompareValue> pq;
 
     for(int i=0; i<k; i++){
-        pq.push(Node(primes[i], primes[i], 1));
+        //prime, index, value
+        pq.push(Node(primes[i], 1, primes[i]));
     }
     
     for(int i=2; i<=n; i++){
@@ -54,7 +55,8 @@ int main(){
 
             dp[i] = currentNode.val;
 
-            pq.push(Node(currentNode.prime * dp[currentNode.index + 1], currentNode.prime, currentNode.index + 1));
+            //prime, index, value
+            pq.push(Node(currentNode.prime, currentNode.index + 1, currentNode.prime * dp[currentNode.index + 1]));
         }
     }
 
