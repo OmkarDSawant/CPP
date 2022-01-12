@@ -60,14 +60,7 @@ int main(){
         cin>>arr[i];
     }
 
-    int lo = 0;
-    int high = n-1;
-    int mid = (lo+high)/2;
-
-    vector<int> a = merge(arr, lo, mid);
-    vector<int> b = merge(arr, mid+1, high);
-
-    vector<int> res = merge2SortedArrays(a,b);
+    vector<int> res = merge(arr, 0, n-1);
 
     for(int i=0; i<n; i++){
         cout<<res[i]<<" ";
