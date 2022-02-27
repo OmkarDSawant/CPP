@@ -57,7 +57,7 @@ bool isSafe(vector<vector<int>> &chess, int row, int col){
     return true;
 }
 
-void generateCombination(int lo, int qpsf, int tq, vector<vector<int>> &chess, vector<bool> &queen){
+void generatePermutation(int qpsf, int tq, vector<vector<int>> &chess){
 
     if(qpsf == tq){
         for(int i=0; i<chess.size(); i++){
@@ -74,21 +74,14 @@ void generateCombination(int lo, int qpsf, int tq, vector<vector<int>> &chess, v
         return;
     }
 
-    for(int i = 0; i<chess.size()*chess .size(); i++){
-        for(int j = 0; j<queen.size(); j++){
-            if(queen[j] == false){
-                queen[j] = true;
-                int row = i/chess.size();
-                int col = i%chess.size();
+    for(int i=0; i<chess.size()*chess.size(); i++){
+        int row = i/chess.size();
+        int col = i%chess.size();
 
-                if(isSafe(chess, row, col)){
-                    chess[row][col] = j+1;
-                    generateCombination(i, qpsf+1, tq, chess, queen);
-                    chess[row][col] = 0;
-                }
-
-                queen[j] = false;
-            }
+        if(chess[row][col] == 0 && isSafe(chess, row, col)){
+            chess[row][col] = qpsf+1;
+            generatePermutation(qpsf+1, tq, chess);
+            chess[row][col] = 0;
         }
     }
 }
@@ -99,9 +92,8 @@ int main(){
     cin>>n;
 
     vector<vector<int>> chess(n, vector<int>(n, 0));
-    vector<bool> queen(n,false);
 
-    generateCombination(-1, 0, n, chess, queen);
+    generatePermutation(0, n, chess);
 
     return 0;
 }
