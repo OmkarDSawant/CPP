@@ -40,13 +40,12 @@ vector<int> merge(vector<int> arr, int start, int end){
         return res;
     }
 
-    while(start<end){
-        vector<int> fh = merge(arr, start, (start+end)/2);
-        vector<int> sh = merge( arr, ((start+end)/2)+1 , end);
+    vector<int> fh = merge(arr, start, (start+end)/2);
+    vector<int> sh = merge( arr, ((start+end)/2)+1 , end);
 
-        vector<int> ca = merge2SortedArrays(fh,sh);
-        return ca;
-    }
+    vector<int> ca = merge2SortedArrays(fh,sh);
+    return ca;
+
 }
 
 int main(){
