@@ -7,9 +7,9 @@
 using namespace std;
 
 int getSize(int idx, vector<vector<int>> &adj, vector<bool> &visited){
-    if(visited[idx]){ //Not for first call but for inner calls
-        return 0;
-    }  
+    // if(visited[idx]){ //Not for first call but for inner calls
+    //     return 0;
+    // }  
     visited[idx] = true;
     int ans = 1;
     for(auto it : adj[idx]){
