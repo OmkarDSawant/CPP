@@ -24,6 +24,8 @@ void solution(vector<int> &arr, vector<int> &set1, vector<int> &set2, int vidx, 
                 ans += to_string(el);
             }
         }
+
+        return;
     }
 
     if( set1.size() < (arr.size() + 1)/2 ){
